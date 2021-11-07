@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+<!--    <changeSet id="1.0.1" author="alex">-->
+<!--        <createTable tableName="ANIMALS">-->
+<!--            <column name="Id" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Name" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Kind" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Hunter" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+
+<!--        <createTable tableName="PRODUCTS">-->
+<!--            <column name="Id" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Name" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Quantity" type="LONG">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Unit" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="Type" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>
