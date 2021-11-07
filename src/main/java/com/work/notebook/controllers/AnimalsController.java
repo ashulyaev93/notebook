@@ -1,17 +1,13 @@
 package com.work.notebook.controllers;
 
-import com.work.notebook.dto.AnimalsDTO;
 import com.work.notebook.entities.Animal;
-import com.work.notebook.facade.AnimalsFacade;
 import com.work.notebook.services.AnimalsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -19,22 +15,25 @@ import java.util.stream.Collectors;
 public class AnimalsController {
 
     private AnimalsService animalsService;
-    private AnimalsFacade animalsFacade;
 
     @Autowired
-    public AnimalsController(AnimalsService animalsService,
-                             AnimalsFacade animalsFacade){
+//    @Qualifier(value = "animalsService")
+    public void setAnimalService(AnimalsService animalsService) {
         this.animalsService = animalsService;
-        this.animalsFacade = animalsFacade;
     }
 
-    @GetMapping("/{animal_id}")
-    public ResponseEntity<List<AnimalsDTO>> getAnimalById(@PathVariable("animal_id") int animalId){
-        List<AnimalsDTO> animalsDTOList = animalsService.getAnimalById(animalId)
-                .stream()
-                .map(animalsFacade::animalsToAnimalsDTO)
-                .collect(Collectors.toList());
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public String listAnimals(Model model){
+        model.addAttribute("animal", new Animal());
+        model.addAttribute("listAnimals", this.animalsService.listAnimals());
 
-        return new ResponseEntity<>(animalsDTOList, HttpStatus.OK);
+        return "animals";
+    }
+
+    @RequestMapping(value = "/animalData/{animal_id}")
+    public String animalData(@PathVariable("animal_id") int animal_id, Model model){
+        model.addAttribute("animal", this.animalsService.getAnimalById(animal_id));
+
+        return "animalData";
     }
 }
