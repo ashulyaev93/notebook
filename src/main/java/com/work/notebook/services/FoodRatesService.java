@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface FoodRatesService {
 
-    FoodRate getSevenDayRationForAnimal(Long animalId);
+    FoodRate getSevenDayRationForAnimal(int id);
 }

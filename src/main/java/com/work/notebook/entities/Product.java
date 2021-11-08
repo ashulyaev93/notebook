@@ -19,10 +19,6 @@ public class Product {
     private Long quantity;
     @Column(name = "unit", length = 64, updatable = false)
     private String unit;
-    @ManyToOne
-    @JoinColumn(name="type", nullable=false)
-    private TypeProduct typeProduct;
-    @OneToMany
-    @JoinColumn(name = "product_id")
-    private Set<FoodRate> foodRates;
+    @Column(name = "type", length = 64, updatable = false)
+    private String typeProduct;
 }

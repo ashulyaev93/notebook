@@ -4,6 +4,6 @@ import com.work.notebook.entities.FoodRate;
 
 public interface FoodRatesDAO {
 
-    public FoodRate getSevenDayRationForAnimal(int animalId);
+    public FoodRate getSevenDayRationForAnimal(int id);
 
 }

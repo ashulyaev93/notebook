@@ -17,7 +17,7 @@ public class FoodRatesServiceImpl implements FoodRatesService {
 
     @Override
     @Transactional
-    public FoodRate getSevenDayRationForAnimal(Long animalId) {
+    public FoodRate getSevenDayRationForAnimal(int id) {
         return null;
     }
 }

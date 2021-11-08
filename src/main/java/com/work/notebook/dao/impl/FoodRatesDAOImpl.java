@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class FoodRatesDAOImpl implements FoodRatesDAO {
 
     @Override
-    public FoodRate getSevenDayRationForAnimal(int animalId) {
+    public FoodRate getSevenDayRationForAnimal(int id) {
         return null;
     }
 }

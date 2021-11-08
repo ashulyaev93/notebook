@@ -4,6 +4,7 @@ import com.work.notebook.dao.AnimalsDAO;
 import com.work.notebook.dao.ProductsDAO;
 import com.work.notebook.entities.Product;
 import com.work.notebook.services.ProductsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,8 @@ public class ProductsServiceImpl implements ProductsService {
 
     private ProductsDAO productsDAO;
 
-    public void setProductsDAO(ProductsDAO productsDAO) {
+    @Autowired
+    public ProductsServiceImpl(ProductsDAO productsDAO) {
         this.productsDAO = productsDAO;
     }
 

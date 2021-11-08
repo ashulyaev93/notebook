@@ -4,10 +4,11 @@ import com.work.notebook.entities.Animal;
 import com.work.notebook.services.AnimalsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,23 +18,21 @@ public class AnimalsController {
     private AnimalsService animalsService;
 
     @Autowired
-//    @Qualifier(value = "animalsService")
-    public void setAnimalService(AnimalsService animalsService) {
+    public AnimalsController(AnimalsService animalsService) {
         this.animalsService = animalsService;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String listAnimals(Model model){
-        model.addAttribute("animal", new Animal());
-        model.addAttribute("listAnimals", this.animalsService.listAnimals());
+    public ResponseEntity<List<Animal>> getAllAnimals(){
+        List<Animal> animalList = animalsService.listAnimals();
 
-        return "animals";
+        return new ResponseEntity<>(animalList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/animalData/{animal_id}")
-    public String animalData(@PathVariable("animal_id") int animal_id, Model model){
-        model.addAttribute("animal", this.animalsService.getAnimalById(animal_id));
+    @GetMapping("/{animal_id}")
+    public ResponseEntity<List<Animal>> getAnimalById(@PathVariable("animal_id") int animalId){
+        Animal animal = animalsService.getAnimalById(animalId);
 
-        return "animalData";
+        return new ResponseEntity(animal,HttpStatus.OK);
     }
 }

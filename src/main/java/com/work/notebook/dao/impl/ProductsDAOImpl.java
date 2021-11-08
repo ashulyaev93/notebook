@@ -1,14 +1,16 @@
 package com.work.notebook.dao.impl;
 
 import com.work.notebook.dao.ProductsDAO;
-import com.work.notebook.entities.Animal;
 import com.work.notebook.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @Repository
@@ -16,31 +18,40 @@ public class ProductsDAOImpl implements ProductsDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductsDAOImpl.class);
 
-    private SessionFactory sessionFactory;
+    private EntityManagerFactory entityManagerFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    @Autowired
+    public ProductsDAOImpl (EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Product> listProducts() {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
+
         List<Product> productsList = session.createQuery("from Product").list();
 
         for(Product products : productsList){
             logger.info("Products list: " + products);
         }
 
+        transaction.commit();
+        session.close();
+
         return productsList;
     }
 
     @Override
     public Product getProductById(int productId) {
-        Session session =this.sessionFactory.getCurrentSession();
-        Product products = session.load(Product.class, new Integer(productId));
-        logger.info("Products successfully loaded. Products details: " + products);
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
 
-        return products;
+        Product product = session.get(Product.class,productId);
+        logger.info("Products successfully loaded. Products details: " + product);
+
+        return product;
     }
 }

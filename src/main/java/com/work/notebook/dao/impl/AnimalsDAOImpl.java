@@ -4,10 +4,13 @@ import com.work.notebook.dao.AnimalsDAO;
 import com.work.notebook.entities.Animal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @Repository
@@ -15,31 +18,44 @@ public class AnimalsDAOImpl implements AnimalsDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(AnimalsDAOImpl.class);
 
-    private SessionFactory sessionFactory;
+    private EntityManagerFactory entityManagerFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    @Autowired
+    public AnimalsDAOImpl (EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Animal> listAnimals() {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
+
         List<Animal> animalsList = session.createQuery("from Animal").list();
 
         for(Animal animals : animalsList){
             logger.info("Animals list: " + animals);
         }
 
+        transaction.commit();
+        session.close();
+
         return animalsList;
     }
 
     @Override
     public Animal getAnimalById(int animalId) {
-        Session session =this.sessionFactory.getCurrentSession();
-        Animal animals = session.load(Animal.class, new Integer(animalId));
-        logger.info("Animals successfully loaded. Animals details: " + animals);
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
 
-        return animals;
+        Animal animal = session.get(Animal.class,animalId);
+
+        logger.info("Animals successfully loaded. Animals details: " + animal);
+
+        transaction.commit();
+        session.close();
+
+        return animal;
     }
 }
