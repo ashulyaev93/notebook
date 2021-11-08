@@ -1,12 +1,10 @@
-package com.work.notebook.services;
+package com.work.notebook.dao;
 
 import com.work.notebook.entities.Animal;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public interface AnimalsService {
+public interface AnimalsDAO {
 
     public List<Animal> listAnimals();
     public Animal getAnimalById(int animalId);
