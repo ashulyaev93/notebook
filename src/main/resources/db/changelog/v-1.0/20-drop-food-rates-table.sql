@@ -1,0 +1,1 @@
+drop table ZOO.FOOD_RATES
