@@ -12,12 +12,16 @@ public class FoodRate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private int id;
-    @Column(name = "animal", length = 64, updatable = false)
-    private String animal;
+
+    @Column(name = "animal_id", nullable = false)
+    private int animalId;
+
     @Column(name = "product", length = 64, updatable = false)
     private String product;
+
     @Column(name = "rate")
     private Long rate;
+
     @Column(name = "unit", length = 64, updatable = false)
     private String unit;
 }

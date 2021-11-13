@@ -1,10 +1,11 @@
 package com.work.notebook.services;
 
+import com.work.notebook.entities.Animal;
 import com.work.notebook.entities.FoodRate;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface FoodRatesService {
 
-    FoodRate getSevenDayRationForAnimal(int id);
+    FoodRate getRationForAnimalById(int animalId);
 }
