@@ -1,6 +1,7 @@
 package com.work.notebook.dao.impl;
 
 import com.work.notebook.dao.AnimalsDAO;
+import com.work.notebook.dto.AnimalDTO;
 import com.work.notebook.entities.Animal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -72,5 +73,28 @@ public class AnimalsDAOImpl implements AnimalsDAO {
 
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public Animal incomeAnimal(AnimalDTO animalDTO) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
+        Animal animals;
+        if(animalDTO.getAnimalId() == null) {
+            animals = new Animal();
+            animals.setKindAnimals(animalDTO.getKindAnimals());
+            animals.setName(String.valueOf(animalDTO.getName()));
+            animals.setPredatorSign(animalDTO.getPredatorSign());
+            session.save(animals);
+        }else {
+            animals = session.get(Animal.class, animalDTO.getAnimalId());
+            session.update(animals);
+        }
+
+        transaction.commit();
+        session.close();
+
+        return animals;
     }
 }

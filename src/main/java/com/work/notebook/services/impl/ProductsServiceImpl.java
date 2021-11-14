@@ -1,6 +1,5 @@
 package com.work.notebook.services.impl;
 
-import com.work.notebook.dao.AnimalsDAO;
 import com.work.notebook.dao.ProductsDAO;
 import com.work.notebook.entities.Product;
 import com.work.notebook.services.ProductsService;

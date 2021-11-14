@@ -12,6 +12,7 @@ mvn liquibase:update -Dliquibase.url=jdbc:h2:~/zoo;DB_CLOSE_ON_EXIT=FALSE;AUTO_S
 a.  Получить информацию о всех животных. "~/zoo/animals/all"
 b.  Получить информацию о всех продуктах. "~/zoo/products/all"
 c.  Получить информацию о животном по id. "~/zoo/animals/{animal_id}"
-d.  Получить информацию о продукте по id. "~/zoo/animals/{product_id}" (также можно увидеть у кого из животных в рационе есть данный продукт)
+d.  Получить информацию о продукте по id. "~/zoo/products/{product_id}" (также можно увидеть у кого из животных в рационе есть данный продукт)
 e.  Получить информацию о питании животных на 7 дней. "~/zoo/foodRates/animal/{animal_id}"
 f.  Удаление животного по id. "~/zoo/animals/delete/{animal_id}"
+g.  Добавить животного. "~/zoo/animals/income"
