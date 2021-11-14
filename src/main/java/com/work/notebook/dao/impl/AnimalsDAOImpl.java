@@ -58,4 +58,19 @@ public class AnimalsDAOImpl implements AnimalsDAO {
 
         return animal;
     }
+
+    @Override
+    public void deleteAnimal(int animalId) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction transaction = null;
+        transaction = session.beginTransaction();
+
+        Animal animal = session.find(Animal.class,animalId);
+        session.remove(animal);
+
+        logger.info("Animal successfully deleted. Animal details: " + animal);
+
+        transaction.commit();
+        session.close();
+    }
 }

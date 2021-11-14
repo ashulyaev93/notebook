@@ -1,6 +1,5 @@
 package com.work.notebook.entities;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,7 +1,6 @@
 package com.work.notebook.dao.impl;
 
 import com.work.notebook.dao.FoodRatesDAO;
-import com.work.notebook.entities.Animal;
 import com.work.notebook.entities.FoodRate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
-import java.io.Serializable;
 
 @Repository
 public class FoodRatesDAOImpl implements FoodRatesDAO {
@@ -27,14 +25,14 @@ public class FoodRatesDAOImpl implements FoodRatesDAO {
     }
 
     @Override
-    public FoodRate getRationForAnimalById(int animalId) {
+    public FoodRate getRationById(int id) {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         Transaction transaction = null;
         transaction = session.beginTransaction();
 
-        FoodRate foodRate = session.get(FoodRate.class, animalId);
+        FoodRate foodRate = session.get(FoodRate.class, id);
 
-        logger.info("Food rates successfully loaded. Animals id: " + animalId);
+        logger.info("Food rates successfully loaded. Food rate id: " + id);
 
         transaction.commit();
         session.close();

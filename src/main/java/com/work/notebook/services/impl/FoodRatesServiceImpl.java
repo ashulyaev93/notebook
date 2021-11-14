@@ -1,7 +1,6 @@
 package com.work.notebook.services.impl;
 
 import com.work.notebook.dao.FoodRatesDAO;
-import com.work.notebook.entities.Animal;
 import com.work.notebook.entities.FoodRate;
 import com.work.notebook.services.FoodRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class FoodRatesServiceImpl implements FoodRatesService {
 
     @Override
     @Transactional
-    public FoodRate getRationForAnimalById(int animalId) {
-        return this.foodRatesDAO.getRationForAnimalById(animalId);
+    public FoodRate getRationById(int id) {
+        return this.foodRatesDAO.getRationById(id);
     }
 }
