@@ -3,7 +3,8 @@ package com.work.notebook.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,4 +26,8 @@ public class Product {
 
     @Column(name = "type", length = 64, updatable = false)
     private String typeProduct;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "product_id")
+    private List<FoodRate> foodRates = new ArrayList<>();
 }

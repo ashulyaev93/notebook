@@ -30,4 +30,13 @@ public class AnimalsServiceImpl implements AnimalsService {
     public Animal getAnimalById(int animalId) {
         return this.animalsDAO.getAnimalById(animalId);
     }
+
+    @Override
+    @Transactional
+    public void deleteAnimal(int animalId) {
+        System.out.println("Delete animal " + animalId);
+        animalsDAO.deleteAnimal(animalId);
+    }
+
+
 }

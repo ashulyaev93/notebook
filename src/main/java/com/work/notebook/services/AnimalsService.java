@@ -10,4 +10,5 @@ public interface AnimalsService {
 
     public List<Animal> listAnimals();
     public Animal getAnimalById(int animalId);
+    public void deleteAnimal(int animalId);
 }

@@ -1,6 +1,7 @@
 package com.work.notebook.controllers;
 
 import com.work.notebook.entities.Animal;
+import com.work.notebook.response.MessageResponse;
 import com.work.notebook.services.AnimalsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class AnimalsController {
         Animal animal = animalsService.getAnimalById(animalId);
 
         return new ResponseEntity(animal,HttpStatus.OK);
+    }
+
+    @GetMapping("/delete/{animal_id}")
+    public ResponseEntity<MessageResponse> deleteAnimal(@PathVariable("animal_id") int animalId){
+        animalsService.deleteAnimal(animalId);
+        return new ResponseEntity<>(new MessageResponse("Animal deleted"), HttpStatus.OK);
     }
 }

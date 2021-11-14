@@ -16,8 +16,8 @@ public class FoodRate {
     @Column(name = "animal_id", nullable = false)
     private int animalId;
 
-    @Column(name = "product", length = 64, updatable = false)
-    private String product;
+    @Column(name = "product_id", nullable = false)
+    private int productId;
 
     @Column(name = "rate")
     private Long rate;
