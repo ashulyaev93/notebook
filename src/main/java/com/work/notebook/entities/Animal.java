@@ -12,7 +12,7 @@ public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "animal_id", nullable = false, unique = true, updatable = false)
-    private int animalId;
+    private Integer animalId;
 
     @Column(name = "name", length = 64, updatable = false)
     private String name;

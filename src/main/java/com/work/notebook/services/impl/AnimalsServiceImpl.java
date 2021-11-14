@@ -1,6 +1,7 @@
 package com.work.notebook.services.impl;
 
 import com.work.notebook.dao.AnimalsDAO;
+import com.work.notebook.dto.AnimalDTO;
 import com.work.notebook.entities.Animal;
 import com.work.notebook.services.AnimalsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class AnimalsServiceImpl implements AnimalsService {
     public void deleteAnimal(int animalId) {
         System.out.println("Delete animal " + animalId);
         animalsDAO.deleteAnimal(animalId);
+    }
+
+    @Override
+    @Transactional
+    public Animal incomeAnimal(AnimalDTO animalDTO) {
+        return animalsDAO.incomeAnimal(animalDTO);
     }
 
 
